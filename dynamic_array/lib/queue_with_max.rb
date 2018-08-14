@@ -6,3 +6,36 @@
 # Use your RingBuffer to achieve optimal shifts! Write any additional
 # methods you need.
 
+require_relative 'ring_buffer'
+
+class QueueWithMax
+  def initialize
+    @store = RingBuffer.new
+    @maxs = RingBuffer.new
+  end
+
+  def enqueue(val)
+    store.push(val)
+    while maxs.length > 0 && val > maxs[maxs.length - 1]
+      maxs.pop
+    end
+    maxs.push(val)
+  end
+
+  def dequeue
+    el = store.shift
+    maxs.shift if el == maxs[0]
+    el
+  end
+
+  def max 
+    maxs[0]
+  end
+
+  def length 
+    store.length
+  end
+
+  protected
+  attr_reader :store, :maxs
+end
