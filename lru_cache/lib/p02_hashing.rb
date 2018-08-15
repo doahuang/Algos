@@ -4,14 +4,16 @@ end
 
 class Array
   def hash
-    self.map.with_index do |el, i|
-      el.hash * i
-    end.reduce(0, :+)
+    self.map.with_index{ |el, i| el.hash * i }
+        .reduce(0, :+)
   end
 end
 
 class String
   def hash
+    self.split('')
+        .map(&:ord)
+        .hash
   end
 end
 
