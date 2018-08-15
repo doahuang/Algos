@@ -11,7 +11,7 @@ end
 
 class String
   def hash
-    self.split('')
+    self.chars
         .map(&:ord)
         .hash
   end
@@ -21,6 +21,7 @@ class Hash
   # This returns 0 because rspec will break if it returns nil
   # Make sure to implement an actual Hash#hash method
   def hash
-    0
+    self.map{ |k, v| k.to_s.hash + v.to_s.hash }
+        .hash
   end
 end
