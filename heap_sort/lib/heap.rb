@@ -55,7 +55,7 @@ class BinaryMinHeap
     return array if prc.call(parent, child) == -1
 
     array[child_idx], array[parent_idx] = parent, child
-    heapify_down(array, child_idx, &prc)
+    heapify_down(array, child_idx, len, &prc)
   end
 
   def self.heapify_up(array, child_idx, len = array.length, &prc)
